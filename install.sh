@@ -25,6 +25,20 @@ if [[ $1 == --brew ]]; then
   brew bundle --file=$DOT/Brewfile
 fi
 
+# Homebrew deja algunas carpetas con escritura para el grupo y compinit las marca como inseguras
+if command -v brew >/dev/null; then
+  for d in $(brew --prefix)/share $(brew --prefix)/share/zsh $(brew --prefix)/share/zsh/site-functions; do
+    [[ -d $d ]] && chmod go-w $d
+  done
+  echo "permisos de $(brew --prefix)/share corregidos"
+fi
+
+# zsh-autocomplete: el paquete de brew viene sin sus funciones, así que se clona la release
+if [[ ! -d ~/.local/share/zsh-autocomplete ]]; then
+  git clone -q --depth 1 --branch 26.08.04 https://github.com/marlonrichert/zsh-autocomplete.git ~/.local/share/zsh-autocomplete
+  echo "clonado ~/.local/share/zsh-autocomplete"
+fi
+
 link zsh/.zshrc                 ~/.zshrc
 link kitty/kitty.conf           ~/.config/kitty/kitty.conf
 link kitty/lainos.conf          ~/.config/kitty/lainos.conf

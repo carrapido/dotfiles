@@ -2,8 +2,16 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # ─── autocompletado ───
 FPATH="/opt/homebrew/share/zsh-completions:/opt/homebrew/share/zsh/site-functions:$FPATH"
-autoload -Uz compinit && compinit -i
-zstyle ':completion:*' menu select
+# menú de opciones en vivo mientras escribes (↑↓ para elegir, Tab para entrar al menú)
+# se carga antes que compinit y ya lo llama él; lo clona install.sh (el paquete de brew viene incompleto)
+if [[ -r ~/.local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]]; then
+  # -i: sin pregunta de "insecure directories" (la responde la primera tecla y aborta el completado)
+  zstyle ':autocomplete::compinit' arguments -i
+  source ~/.local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+else
+  autoload -Uz compinit && compinit -i
+  zstyle ':completion:*' menu select
+fi
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors 'di=38;2;126;156;216' 'ln=38;2;149;127;184' 'ex=38;2;94;239;245'
 

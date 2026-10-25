@@ -33,11 +33,14 @@ if command -v brew >/dev/null; then
   echo "permisos de $(brew --prefix)/share corregidos"
 fi
 
-# zsh-autocomplete: el paquete de brew viene sin sus funciones, así que se clona la release
-if [[ ! -d ~/.local/share/zsh-autocomplete ]]; then
-  git clone -q --depth 1 --branch 26.08.04 https://github.com/marlonrichert/zsh-autocomplete.git ~/.local/share/zsh-autocomplete
-  echo "clonado ~/.local/share/zsh-autocomplete"
-fi
+# oh-my-zsh y los plugins de fuera (como ML4W); el .zshrc es el de este repo, no el que trae oh-my-zsh
+clone() {  # clone <repo> <destino>
+  [[ -d $2 ]] && { echo "ok      $2"; return }
+  git clone -q --depth 1 $1 $2 && echo "clonado $2"
+}
+clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+clone https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting
 
 link zsh/.zshrc                 ~/.zshrc
 link kitty/kitty.conf           ~/.config/kitty/kitty.conf

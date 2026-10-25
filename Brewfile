@@ -6,8 +6,8 @@ brew "go"
 brew "starship"
 # Terminal image and video viewer
 brew "timg"
-# Fish-like fast/unobtrusive autosuggestions for zsh
-brew "zsh-autosuggestions"
+# Command-line fuzzy finder (Ctrl+R en el historial)
+brew "fzf"
 # Additional completion definitions for zsh
 brew "zsh-completions"
 cask "font-courier-prime"

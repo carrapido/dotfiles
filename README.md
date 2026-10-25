@@ -6,7 +6,7 @@ Configuración de terminal para macOS con temática de *Serial Experiments Lain*
 
 | Carpeta | Va a | Qué es |
 |---|---|---|
-| `zsh/.zshrc` | `~/.zshrc` | autocompletado, sugerencias, historial, starship y fastfetch al abrir |
+| `zsh/.zshrc` | `~/.zshrc` | oh-my-zsh al estilo ML4W (menú con Tab, sugerencias, colores de sintaxis, fzf en Ctrl+R), autocorrector, starship y fastfetch |
 | `kitty/` | `~/.config/kitty/` | `kitty.conf` (fuente, opacidad 0.75, blur) + tema `lainos.conf` |
 | `starship/starship.toml` | `~/.config/starship.toml` | prompt |
 | `fastfetch/` | `~/.config/fastfetch/` | módulos y logo ASCII (para terminales que no son kitty) |
@@ -25,6 +25,16 @@ cd ~/dotfiles
 ```
 
 `install.sh` crea enlaces simbólicos desde tu `$HOME` a este repo, así que lo que edites en `~/.config/...` queda en el repo. Si ya existe un archivo, lo guarda como `<archivo>.backup-<fecha>`. Puedes ejecutarlo las veces que quieras.
+
+## Atajos de la terminal
+
+| Tecla | Qué hace |
+|---|---|
+| `Tab` | menú de opciones (flechas para moverte); corrige errores de tipeo |
+| `→` | acepta la sugerencia gris |
+| `Ctrl+R` | busca en el historial con fzf |
+| `Esc Esc` | añade `sudo` al comando |
+| `Ctrl+O` | copia la línea actual |
 
 ## GIFs
 

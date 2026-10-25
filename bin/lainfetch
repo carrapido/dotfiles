@@ -1,0 +1,8 @@
+#!/bin/zsh
+# fastfetch + GIF de Lain al azar, animado por kitty (kitten icat).
+# kitty anima el GIF por su cuenta, así que el prompt queda libre al instante.
+gifs=(~/.config/glain/gifs/*.gif(N))
+(( $#gifs )) || exec fastfetch "$@"
+gif=${gifs[RANDOM % $#gifs + 1]}
+export PATH="/Applications/kitty.app/Contents/MacOS:$PATH"
+exec fastfetch --logo-type kitty-icat --logo "$gif" --logo-width 35 --logo-height 20 "$@"

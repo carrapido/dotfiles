@@ -1,0 +1,20 @@
+#!/bin/zsh
+# Abre kitty al iniciar sesión tras encender/reiniciar el Mac y lo centra en la pantalla.
+open -a kitty
+for i in {1..40}; do
+  osascript -e 'tell application "System Events" to exists window 1 of process "kitty"' 2>/dev/null | grep -q true && break
+  sleep 0.5
+done
+osascript <<'OSA'
+use framework "AppKit"
+set vf to current application's NSScreen's mainScreen()'s visibleFrame()
+set ff to current application's NSScreen's mainScreen()'s frame()
+set sw to item 1 of item 2 of vf
+set sh to item 2 of item 2 of vf
+-- origen de visibleFrame está abajo; System Events cuenta desde arriba
+set topInset to (item 2 of item 2 of ff) - (item 2 of item 1 of vf) - sh
+tell application "System Events" to tell process "kitty"
+  set {ww, wh} to size of window 1
+  set position of window 1 to {((sw - ww) / 2) as integer, (topInset + (sh - wh) / 2) as integer}
+end tell
+OSA

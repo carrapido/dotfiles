@@ -1,0 +1,97 @@
+# ─── LainOS / The Wired — starship ───
+# "No matter where you go, everyone's connected."
+
+"$schema" = "https://starship.rs/config-schema.json"
+
+palette = "wired"
+add_newline = true
+
+format = """
+[╭─](purple)$os$username[@](blue)$hostname [](purple)$directory$git_branch$git_status$python$nodejs$rust$golang$cmd_duration
+[╰─](purple)$character"""
+
+right_format = "[present day, present time](dimmed bright-black) $time"
+
+[palettes.wired]
+cyan   = "#5eeff5"
+purple = "#791dc7"
+blue   = "#7e9cd8"
+lilac  = "#957fb8"
+orange = "#ffa066"
+red    = "#ff5d62"
+grey   = "#727169"
+night  = "#090618"
+
+[os]
+disabled = false
+style = "bold cyan"
+format = "[$symbol]($style) "
+
+[os.symbols]
+Macos = ""
+
+[username]
+show_always = true
+style_user = "bold cyan"
+style_root = "bold red"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "lilac"
+format = "[wired]($style)"
+
+[directory]
+style = "bold blue"
+read_only = " 󰌾"
+truncation_length = 3
+truncation_symbol = "…/"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[directory.substitutions]
+"~" = "layer:home"
+
+[git_branch]
+symbol = " "
+style = "lilac"
+format = "[⟨](purple)[$symbol$branch]($style)[⟩](purple) "
+
+[git_status]
+style = "orange"
+format = "([$all_status$ahead_behind]($style) )"
+
+[python]
+symbol = " "
+style = "cyan"
+format = "[$symbol$version]($style) "
+
+[nodejs]
+symbol = " "
+style = "cyan"
+format = "[$symbol$version]($style) "
+
+[rust]
+symbol = " "
+style = "orange"
+format = "[$symbol$version]($style) "
+
+[golang]
+symbol = " "
+style = "cyan"
+format = "[$symbol$version]($style) "
+
+[cmd_duration]
+min_time = 2000
+style = "grey"
+format = "[ $duration]($style) "
+
+[character]
+success_symbol = "[❯](bold cyan)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold lilac)"
+
+[time]
+disabled = false
+style = "cyan"
+time_format = "%H:%M"
+format = "[$time]($style)"
